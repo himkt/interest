@@ -8,3 +8,5 @@
 ### 2018/12
 - week1 (include 2018-11-week5): [here](./2018/12/week1.md)
 - week2: [here](./2018/12/week2.md)
+- week3: [here](./2018/12/week3.md)
+- week4: [here](./2018/12/week4.md)
