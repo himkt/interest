@@ -36,11 +36,11 @@ function toHTML(paper_json, index) {
 
 
 function toJSON(records) {
-    records = records.map(function(record) {
-        return record.split('\t')})
+    let f_split = (r) => r.split('\t')
 
-    var columns = records[0]
-    var papers = records.slice(1,)
+    var records_array = records.map(f_split)
+    var columns = records_array[0]
+    var papers = records_array.slice(1,)
     var papers_json = papers.map(function(paper) {
         var dict = {}
         for (var i=0; i<columns.length; i++) dict[columns[i]] = paper[i]
@@ -86,7 +86,7 @@ class Paper extends React.Component {
     }
 
 
-    handleFilterVal(query) {
+    handleFilterTextVal(query) {
         query = query.toLowerCase()
         const filt = this.state.data.filter(
             function(paper) {
@@ -94,7 +94,7 @@ class Paper extends React.Component {
                     paper['title'].toLowerCase().match(query) ||
                     paper['conference'].toLowerCase().match(query) ||
                     paper['note'].toLowerCase().match(query) ||
-                    paper['link'].toLowerCase().match(query) ||
+                    // paper['link'].toLowerCase().match(query) ||
                     paper['year'].match(query)
                 )
             }
@@ -115,7 +115,7 @@ class Paper extends React.Component {
         if (this.state.filt) {
             return (
                 <div>
-                    <Form onFilterVal={this.handleFilterVal.bind(this)} />
+                    <Form onFilterVal={this.handleFilterTextVal.bind(this)} />
                     <div> {toList(this.state.filt)} </div>
                 </div>
             )
