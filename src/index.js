@@ -22,15 +22,18 @@ function toHTML(paper_json, index) {
     list.push(<li> added: {paper_json['date'] } </li>)
     list.push(<li> in {paper_json['conference'] || 'Unknown'} {paper_json['year']} </li>)
 
-    if (paper_json.note) {
-        list.push(<li> {paper_json['note']} </li>)
-    }
-
     return (
-        <ul key={index}>
-            <li><a href={paper_json['link']}>{paper_json['title']}</a></li>
+        <div class="card border-info mb-3" key={index}>
+            <div class="card-header">
+                { paper_json['conference'] || 'Unkown' }
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"> {paper_json['title']} </h5>
+                <p class="card-text"> {paper_json['note'] }</p>
+                <a href={ paper_json['link'] } class="btn btn-primary">Read the paper</a>
+            </div>
             <ul>{list}</ul>
-        </ul>
+        </div>
     )
 }
 
@@ -66,10 +69,11 @@ class Form extends React.Component {
 
     render() {
         return (
-            <div>
-                <input type="text" ref="myinput"
-                    defaultValue="" onKeyUp={this._filterVal.bind(this)} />
-            </div>
+            <div><div class="form-group">
+                <input type="text" ref="myinput" class="form-control"
+                    placeholder="Named Entity Recognition"
+                    onKeyUp={this._filterVal.bind(this)} />
+            </div></div>
         )
     }
 }
@@ -116,7 +120,7 @@ class Paper extends React.Component {
             return (
                 <div>
                     <Form onFilterVal={this.handleFilterTextVal.bind(this)} />
-                    <div> {toList(this.state.filt)} </div>
+                    <div class='card-columns'> {toList(this.state.filt)} </div>
                 </div>
             )
         }
