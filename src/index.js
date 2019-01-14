@@ -1,10 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 
 
 const URL = 'https://docs.google.com/spreadsheets/d/e/' +
     '2PACX-1vQ3TV9KzYftbwV0gtWRZpTjMz9PSGHDU25705dbazQ_jmCYasQeL1YKP3jfZFY2kZ7PMWCYAVjLVG8h/' +
     'pub?gid=0&single=true&output=tsv'
+
+
+function createHeader(paper_json) {
+    var result = []
+    if (paper_json['conference'] ) {
+        result.push(<span class='badge badge-info'> {paper_json['conference']} </span>)
+    }
+    if (paper_json['year'] ) {
+        result.push(<span class='badge badge-success'> {paper_json['year']} </span>)
+    }
+
+    return <div class='headerComponent'> {result} </div>
+}
 
 
 function toList(filt) {
@@ -17,21 +31,16 @@ function toList(filt) {
 
 
 function toHTML(paper_json, index) {
-    let list = []
-    list.push(<li> added: {paper_json['date'] } </li>)
-    list.push(<li> in {paper_json['conference'] || 'Unknown'} {paper_json['year']} </li>)
-
     return (
         <div class="card border-info mb-3" key={index}>
-            <div class="card-header">
-                { paper_json['conference'] || 'Unkown' }
+            <div class="card-header text-muted">
+                Added: {paper_json['date'] }
             </div>
             <div class="card-body">
-                <h5 class="card-title"> {paper_json['title']} </h5>
-                <p class="card-text"> {paper_json['note'] }</p>
-                <a href={ paper_json['link'] } class="btn btn-primary">Read the paper</a>
+                <h5 class="card-title"> <a href={paper_json['link']}> {paper_json['title']} </a></h5>
+                { createHeader(paper_json) }
+                <p class="card-text">{paper_json['note'] }</p>
             </div>
-            <ul>{list}</ul>
         </div>
     )
 }
@@ -45,7 +54,9 @@ function toJSON(records) {
     var papers = records_array.slice(1,)
     var papers_json = papers.map(function(paper) {
         var dict = {}
-        for (var i=0; i<columns.length; i++) dict[columns[i]] = paper[i]
+        for (var i=0; i<columns.length; i++) {
+            dict[columns[i]] = paper[i] || ''
+        }
         return dict
     })
 
