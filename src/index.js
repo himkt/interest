@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
 
 
 const URL = 'https://docs.google.com/spreadsheets/d/e/' +
@@ -56,6 +55,9 @@ function toJSON(records) {
 
 function parseTSV(response) {
     var records = response.split('\n')
+    records = records.map(function(record) {
+        return record.trim()})
+
     var papers_json = toJSON(records)
     return papers_json
 }
