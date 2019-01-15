@@ -9,7 +9,8 @@ const URL = 'https://docs.google.com/spreadsheets/d/e/' +
 
 
 function createHeader(paper_json) {
-    var result = []
+    let result = []
+
     if (paper_json['conference'] ) {
         result.push(<span class='badge badge-info'> {paper_json['conference']} </span>)
     }
@@ -48,28 +49,25 @@ function toHTML(paper_json, index) {
 
 function toJSON(records) {
     let f_split = (r) => r.split('\t')
-
-    var records_array = records.map(f_split)
-    var columns = records_array[0]
-    var papers = records_array.slice(1,)
-    var papers_json = papers.map(function(paper) {
-        var dict = {}
+    let records_array = records.map(f_split)
+    let columns = records_array[0]
+    let papers = records_array.slice(1,)
+    let papers_json = papers.map(function(paper) {
+        let dict = {}
         for (var i=0; i<columns.length; i++) {
-            dict[columns[i]] = paper[i] || ''
+            dict[columns[i].trim()] = paper[i] || ''
         }
         return dict
     })
-
     return papers_json
 }
 
 
 function parseTSV(response) {
-    var records = response.split('\n')
+    let records = response.split('\n')
     records = records.map(function(record) {
-        return record.trim()})
-
-    var papers_json = toJSON(records)
+        return record.replace(/\n$/, '')})
+    let papers_json = toJSON(records)
     return papers_json
 }
 
