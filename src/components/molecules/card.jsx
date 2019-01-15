@@ -14,6 +14,7 @@ const Card = ({ paper, idx }: Props) => (
         <a href={paper.link}>{paper.title}</a>
       </h5>
       <div className="headerComponent">
+        { createPopup(paper_json) }
         <PaperBadge text={paper.conference} badgeClass="badge badge-info" />
         <PaperBadge text={paper.year} badgeClass="badge badge-success" />
       </div>
