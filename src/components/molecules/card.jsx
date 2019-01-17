@@ -1,7 +1,6 @@
 import React from 'react'
 import PaperBadge from '../atoms/paperBadge'
 import Popup from 'reactjs-popup'
-import { endianness } from 'os';
 
 type Props = {
     paper: any,
@@ -13,10 +12,10 @@ function extractVolumeNumber(paper_json) {
     let year_volume_number = paper_json['year'].split(',')
     let arr_size = year_volume_number.length
 
-    if (arr_size == 2) {
+    if (arr_size === 2) {
         return [year_volume_number[1], '-1']
     }
-    else if (arr_size == 3) {
+    else if (arr_size === 3) {
         return [year_volume_number[1], year_volume_number[2]]
     }
     else {
@@ -62,10 +61,10 @@ function createPopup(paper_json) {
 
         let [volume, number] = extractVolumeNumber(paper_json)
         
-        if (volume != '-1') {
+        if (volume !== '-1') {
             bibtex_item += '&nbsp;&nbsp;volume={' + volume + '},<br>'
         }
-        if (number != '-1') {
+        if (number !== '-1') {
             bibtex_item += '&nbsp;&nbsp;number={' + number + '},<br>'
         }
 
@@ -101,8 +100,7 @@ const Card = ({ paper, idx }: Props) => (
                 <a href={paper.link}>{paper.title}</a>
             </h5>
             <div className="headerComponent">
-                {createPopup(paper)}
-                <PaperBadge
+            <PaperBadge
                     text={normalizeBookName(paper)}
                     badgeClass="badge badge-info"
                 />
@@ -113,6 +111,7 @@ const Card = ({ paper, idx }: Props) => (
             </div>
             <p className="card-text">{paper.note}</p>
         </div>
+        <div className="card-footer"> {createPopup(paper)} </div>
     </div>
 )
 
