@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react'
 
 type Props = {
-  text: string,
-  badgeClass: string
-};
+    text: string,
+    badgeClass: string
+}
 
 const PaperBadge = ({ text, badgeClass }: Props) => (
-  <div>
-    <span className={badgeClass}>{text}</span>
-  </div>
-);
+    <div>
+        <span className={badgeClass}>{text}</span>
+    </div>
+)
 
-export default PaperBadge;
+export default PaperBadge
