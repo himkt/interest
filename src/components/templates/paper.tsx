@@ -3,12 +3,14 @@ import parseTSV from '../../utils/parse'
 import Card from '../molecules/card'
 import Form from '../molecules/form'
 
+
 const URL =
     'https://docs.google.com/spreadsheets/d/e/' +
     '2PACX-1vQ3TV9KzYftbwV0gtWRZpTjMz9PSGHDU25705dbazQ_jmCYasQeL1YKP3jfZFY2kZ7PMWCYAVjLVG8h/' +
     'pub?gid=0&single=true&output=tsv'
 
-export default class Paper extends Component {
+
+class Paper extends Component {
     constructor(props) {
         super(props)
         this.handleFilterTextVal = this.handleFilterTextVal.bind(this)
@@ -59,3 +61,6 @@ export default class Paper extends Component {
         return <div> Loading... </div>
     }
 }
+
+
+export default Paper

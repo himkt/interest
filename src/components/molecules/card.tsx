@@ -2,6 +2,7 @@ import React from 'react'
 import PaperBadge from '../atoms/paperBadge'
 import Popup from 'reactjs-popup'
 
+
 type Props = {
     paper: any,
     idx: number
@@ -51,6 +52,7 @@ function createKey(paper_json) {
     }
 }
 
+
 function createPopup(paper_json) {
     let bibtex_item = ''
     let book_name = normalizeBookName(paper_json)
@@ -84,13 +86,14 @@ function createPopup(paper_json) {
 
     return (
         <Popup
-            trigger={<button class="btn btn-info"> BibTex export </button>}
+            trigger={<button className="btn btn-info"> BibTex export </button>}
             modal
         >
             <div dangerouslySetInnerHTML={ret} />
         </Popup>
     )
 }
+
 
 const Card = ({ paper, idx }: Props) => (
     <div className="card border-info mb-3" key={idx}>
@@ -114,5 +117,6 @@ const Card = ({ paper, idx }: Props) => (
         <div className="card-footer"> {createPopup(paper)} </div>
     </div>
 )
+
 
 export default Card

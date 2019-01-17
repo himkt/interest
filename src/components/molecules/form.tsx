@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
-export default class Form extends Component {
+
+class Form extends Component {
     filterVal() {
-        const val = this.refs.myinput.value
+        const val: any = this.refs.myinput.value
         this.props.onFilterVal(val)
     }
 
@@ -22,3 +23,6 @@ export default class Form extends Component {
         )
     }
 }
+
+
+export default Form

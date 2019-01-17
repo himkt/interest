@@ -1,0 +1,16 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+  "rules": {
+    "no-console": false, // allow some console statements for debugging
+    "member-access": false, // start without having to write public, private modifiers
+    "jsx-no-lambda": false, // lambdas in render are bad for performance but this can be annoying during prototyping
+    "jsx-boolean-value": false // allow someProp instead of someProp={true}
+  }
+}
