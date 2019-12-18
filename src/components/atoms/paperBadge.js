@@ -1,11 +1,7 @@
 import React from 'react'
 
-type Props = {
-    text: string,
-    badgeClass: string
-}
 
-const PaperBadge = ({ text, badgeClass }: Props) => (
+const PaperBadge = ({ text, badgeClass }) => (
     <div>
         <span className={badgeClass}>{text}</span>
     </div>
