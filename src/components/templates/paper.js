@@ -5,7 +5,7 @@ import Form from '../molecules/form'
 
 const URL =
   'https://docs.google.com/spreadsheets/d/e/' +
-  '2PACX-1vTxXqPAIbPCrFXn6zDo2Jv68vpdFJ7g1_xFJkpwM3kF4qH5rz3Fc_vXb1ReCCUenEknIQRvQm2tYGVG' +
+  '2PACX-1vT9wviFCRSV0iiySFWtTnmtmWp6N3QdWn4bQ-36lk7QlHc9Iz8yHfy6y2d-3F025s5NSYKPb2Hx-Xu7' +
   '/pub?output=tsv'
 
 
@@ -62,7 +62,6 @@ export default class Paper extends React.Component {
       paper.title.toLowerCase().match(query) ||
       paper.conference.toLowerCase().match(query) ||
       paper.note.toLowerCase().match(query) ||
-      // paper['link'].toLowerCase().match(query) ||
       paper.year.match(query)
     )
     this.setState({ filt })
