@@ -1,6 +1,6 @@
 import React from 'react'
-import PaperBadge from '../atoms/paperBadge'
 import Popup from 'reactjs-popup'
+import PaperBadge from '../atoms/paperBadge'
 
 
 function extractVolumeNumber(paper_json) {
@@ -36,7 +36,6 @@ function normalizeBookName(paper_json) {
 
 
 function createKey(paper_json) {
-  console.log(paper_json);
   let raw_authors = paper_json['authors'].split(',')
   let year = normalizeYear(paper_json)
   if (raw_authors.length > 0) {
@@ -46,6 +45,7 @@ function createKey(paper_json) {
     return first_author + year
   }
 }
+
 
 function createPopup(paper_json) {
   let bibtex_item = ''
@@ -80,13 +80,14 @@ function createPopup(paper_json) {
 
   return (
     <Popup
-      trigger={<button class="btn btn-info"> BibTex export </button>}
+      trigger={<button className="btn btn-info"> BibTex export </button>}
       modal
     >
       <div dangerouslySetInnerHTML={ret} />
     </Popup>
   )
 }
+
 
 const Card = ({ paper, idx }) => (
   <div className="card border-info mb-3" key={idx}>
@@ -110,5 +111,6 @@ const Card = ({ paper, idx }) => (
     <div className="card-footer"> {createPopup(paper)} </div>
   </div>
 )
+
 
 export default Card

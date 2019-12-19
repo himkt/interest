@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import parseTSV from '../../utils/parse'
+import React from 'react'
 import Card from '../molecules/card'
 import Form from '../molecules/form'
 
@@ -7,10 +6,34 @@ import Form from '../molecules/form'
 const URL =
   'https://docs.google.com/spreadsheets/d/e/' +
   '2PACX-1vTxXqPAIbPCrFXn6zDo2Jv68vpdFJ7g1_xFJkpwM3kF4qH5rz3Fc_vXb1ReCCUenEknIQRvQm2tYGVG' +
-  '/pub?gid=0&single=true&output=tsv'
+  '/pub?output=tsv'
 
 
-export default class Paper extends Component {
+const toJSON = records => {
+  const fSplit = r => r.split('\t')
+  const recordsArray = records.map(fSplit)
+  const columns = recordsArray[0]
+  const papers = recordsArray.slice(1)
+  const papersJson = papers.map(paper => {
+    const dict = {}
+    for (let i = 0; i < columns.length; i++) {
+      dict[columns[i].trim()] = paper[i] || ''
+    }
+    return dict
+  })
+  return papersJson
+}
+
+
+const parseTSV = response => {
+  let records = response.split('\n')
+  records = records.map(record => record.replace(/\n$/, ''))
+  const papersJson = toJSON(records)
+  return papersJson
+}
+
+
+export default class Paper extends React.Component {
   constructor(props) {
     super(props)
     this.handleFilterTextVal = this.handleFilterTextVal.bind(this)
@@ -21,6 +44,7 @@ export default class Paper extends Component {
   }
 
   componentDidMount() {
+
     fetch(URL)
       .then(response => response.text())
       .then(data => parseTSV(data))
@@ -28,8 +52,7 @@ export default class Paper extends Component {
         this.setState({
           data: filt,
           filt
-        })
-      )
+        }));
   }
 
   handleFilterTextVal(query) {
@@ -52,7 +75,7 @@ export default class Paper extends Component {
           <Form onFilterVal={this.handleFilterTextVal} />
           <div className="card-columns">
             {this.state.filt.map((paper, idx) => (
-              <Card paper={paper} idx={idx} />
+              <Card paper={paper} idx={idx} key={idx} />
             ))}
           </div>
         </div>
