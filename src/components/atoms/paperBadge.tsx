@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React from 'react'
 
 
-export interface Props {
+interface Props {
   text: string
   badgeClass: string
 }
@@ -10,9 +10,7 @@ export interface Props {
 class PaperBadge extends React.Component<Props, {}> {
   render () {
     return (
-      <div>
-        <span className={this.props.badgeClass}>{this.props.text}</span>
-      </div>
+      <span className={this.props.badgeClass}>{this.props.text}</span>
     )
   }
 }

@@ -3,12 +3,6 @@ import Card from '../molecules/card'
 import Form from '../molecules/form'
 
 
-const URL =
-  'https://docs.google.com/spreadsheets/d/e/' +
-'2PACX-1vT9wviFCRSV0iiySFWtTnmtmWp6N3QdWn4bQ-36lk7QlHc9Iz8yHfy6y2d-3F025s5NSYKPb2Hx-Xu7' +
-  '/pub?output=tsv'
-
-
 const toJSON = (records: any) => {
   const fSplit = (r: string) => r.split('\t')
   const recordsArray = records.map(fSplit)
@@ -37,18 +31,33 @@ const parseTSV = ((response: any) => {
 })
 
 
-class Paper extends Component<any, any> {
-  constructor(props: any) {
+interface State {
+  data: any | null
+  filt: any | null
+}
+
+
+class Paper extends Component<{}, State> {
+
+  private url: string = (
+    'https://docs.google.com/spreadsheets/d/e/'
+    + '2PACX-1vT9wviFCRSV0iiySFWtTnmtmWp6N3QdWn4bQ-36lk7QlHc9Iz8yHfy6y2d-3F025s5NSYKPb2Hx-Xu7'
+    + '/pub?output=tsv'
+  )
+
+  constructor(props: {}) {
     super(props)
+
     this.state = {
       data: null,
       filt: null
     }
-    this.handleFilterTextVal = this.handleFilterTextVal.bind(this)
+
+    this.filterContentsByQuery = this.filterContentsByQuery.bind(this)
   }
 
   componentDidMount() {
-    fetch(URL)
+    fetch(this.url)
     .then(response => response.text())
     .then(data => parseTSV(data))
     .then(filt =>
@@ -58,33 +67,38 @@ class Paper extends Component<any, any> {
           }));
   }
 
-  handleFilterTextVal(query: any) {
-    query = query.toLowerCase()
+  filterContentsByQuery(query: string) {
     const filt = this.state.data.filter(
       (paper: any) =>
-      paper.title.toLowerCase().match(query) ||
-        paper.conference.toLowerCase().match(query) ||
-        paper.note.toLowerCase().match(query) ||
-        paper.year.match(query)
+      (
+        paper.title + ' '
+        + paper.conference + ' '
+        + paper.note + ' '
+        + paper.year
+      ).toLowerCase().match(query.toLowerCase())
     )
     this.setState({ filt })
   }
 
   render() {
-    console.log('render: ', this.state)
-    if (this.state.filt) {
-      return (
-        <div>
-          <Form onFilterVal={this.handleFilterTextVal}/>
-          <div className="card-columns">
-            {this.state.filt.map((paper: any, idx: number) => (
-              <Card paper={paper} idx={idx} key={idx} />
-            ))}
-          </div>
-        </div>
-      )
+    if (!this.state.filt) {
+      return <div> Loading... </div>
     }
-    return <div> Loading... </div>
+
+    return (
+      <div>
+        <Form updateContents={this.filterContentsByQuery}/>
+        <section style={{padding: 3 + 'rem'}}>
+          <div className="container">
+            <div className="columns">
+              {this.state.filt.map((paper: any, idx: number) => (
+                <Card paper={paper} idx={idx} key={idx} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    )
   }
 }
 
