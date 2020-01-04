@@ -1,9 +1,6 @@
 const path = require('path');
 
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-
 module.exports = {
   entry: './src/index.tsx',
   resolve: {
@@ -13,6 +10,9 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
+  },
+  optimization: {
+    minimize: false,
   },
   devtool: 'inline-soruce-map',
   module: {
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: [MiniCssExtractPlugin.loader, 'css-loader'],
+        loaders: ['style-loader', 'css-loader'],
       }
     ]
   },
@@ -41,10 +41,5 @@ module.exports = {
       index: 'index.html'
     },
     port: '3000'
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
-  ]
+  }
 }
