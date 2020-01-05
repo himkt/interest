@@ -23,7 +23,6 @@ class ModalButton extends Component<Props, State> {
   }
 
   showModal = () => {
-    console.log(this)
     this.setState({isActive: "is-active"})
   }
 

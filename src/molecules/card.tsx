@@ -38,7 +38,6 @@ class Card extends Component<Props, {}> {
   }
 
   render () {
-    console.log(this.props.paper)
     return (
       <div className="column">
         <div className="card" key={this.props.idx}>
