@@ -74,7 +74,7 @@ class ModalButton extends Component<Props, State> {
             </footer>
           </div>
         </div>
-        <a href="#"><span className="tag is-info" onClick={this.showModal}>BibTex</span></a>
+        <a><span className="tag is-info" onClick={this.showModal}>BibTex</span></a>
       </div>
     )
 

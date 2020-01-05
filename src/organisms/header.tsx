@@ -6,10 +6,10 @@ class Header extends React.Component<any> {
 
   render () {
     return (
-      <nav className="navbar is-transparent">
+      <nav className="navbar is-transparent is-info">
         <div className="container">
           <div className="navbar-brand">
-            <a className="navbar-item" href="https://himkt.github.io/profile"><img src={logo} alt="himkt.github.io/profile" width="85" /></a>
+            <a className="navbar-item" href="https://himkt.github.io/profile"><img src={logo} alt="himkt.github.io/profile" width="93" /></a>
           </div>
 
           <div id="navbarExampleTransparentExample" className="navbar-menu">
