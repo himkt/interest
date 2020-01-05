@@ -71,10 +71,12 @@ class Paper extends Component<{}, State> {
     const filt = this.state.data.filter(
       (paper: any) =>
       (
-        paper.title + ' '
-        + paper.conference + ' '
-        + paper.note + ' '
-        + paper.year
+        paper.Title + ' '
+        + paper.Conference + ' '
+        + paper.Note + ' '
+        + paper.Year + ' '
+        + paper.Source + ' '
+        + paper.Source_short
       ).toLowerCase().match(query.toLowerCase())
     )
     this.setState({ filt })
