@@ -13,6 +13,7 @@
     "jsx": "react",
     "baseUrl": "./src",
     "typeRoots": ["types", "node_modules/@types"],
+    "paths": {"import-png": ["types/import-png"]},
     "allowSyntheticDefaultImports": true
   }
 }
