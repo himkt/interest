@@ -60,7 +60,7 @@ class ModalButton extends Component<Props, State> {
     if(!this.state) return <span />
 
     return (
-      <div>
+      <div style={{paddingRight: 0.5 + 'rem'}}>
         <div className={["modal", this.state.isActive].join(" ")}>
           <div className="modal-background"></div>
           <div className="modal-card">
@@ -75,7 +75,7 @@ class ModalButton extends Component<Props, State> {
             </footer>
           </div>
         </div>
-        <button className="tag is-info" onClick={this.showModal}>BibTex</button>
+        <a href="#"><span className="tag is-info" onClick={this.showModal}>BibTex</span></a>
       </div>
     )
 

@@ -42,25 +42,27 @@ class Card extends Component<Props, {}> {
     return (
       <div className="column">
         <div className="card" key={this.props.idx}>
-          <ModalButton
-            title={this.props.paper['Title']}
-            firstAuthor={this.createFirstAuthor()}
-            authors={this.createAuthors()}
-            year={this.props.paper['Year']}
-            source={this.props.paper['Source']}
-            paperType={this.props.paper['Paper type']}
-          />
-          <div className="card-content">
-            <p className="card-header-title"><a href={this.props.paper.Link}>{this.props.paper.Title}</a></p>
-            <time>Added: {this.props.paper.Timestamp}</time>
+          <div className="card-header">
+            <p className="card-header-title"><time>Added: {this.props.paper.Timestamp}</time></p>
           </div>
           <div className="card-content">
+            <p className="card-header-title"><a href={this.props.paper.Link}>{this.props.paper.Title}</a></p>
             <p className="card-text">{this.props.paper.Note}</p>
           </div>
           <footer className="card-footer">
             <div className="card-footer-item">
               <div className="tags are-medium">
-                <span className="tag is-success is-light"><a href={this.props.paper['Issue link']} target="_blank">Issue</a></span>
+                <ModalButton
+                  title={this.props.paper['Title']}
+                  firstAuthor={this.createFirstAuthor()}
+                  authors={this.createAuthors()}
+                  year={this.props.paper['Year']}
+                  source={this.props.paper['Source']}
+                  paperType={this.props.paper['Paper type']}
+                />
+                <a href={this.props.paper['Issue link']} target="_blank" style={{paddingRight: 0.5 + 'rem'}}>
+                  <span className="tag is-success is-light">Issue</span>
+                </a>
                 <span className="tag is-primary is-light">{this.props.paper.Source_short}</span>
                 <span className="tag is-danger is-light">{this.props.paper.Year}</span>
                 {this.createKeywords()}
