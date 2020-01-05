@@ -76,7 +76,8 @@ class Paper extends Component<{}, State> {
         + paper.Note + ' '
         + paper.Year + ' '
         + paper.Source + ' '
-        + paper.Source_short
+        + paper.SourceShort + ' '
+        + paper.Authors
       ).toLowerCase().match(query.toLowerCase())
     )
     this.setState({ filt })
