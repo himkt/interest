@@ -3,6 +3,8 @@ import React, { Component} from 'react'
 
 interface Props {
   title: string
+  authors: string
+  firstAuthor: string
   year: string
   source: string
   paperType: string
@@ -32,12 +34,19 @@ class ModalButton extends Component<Props, State> {
   createBibTexEntry = () => {
     var entry = []
 
+    const key = this.props.firstAuthor + this.props.year
     if (this.props.paperType == 'Conference paper') {
-      entry.push(`@inproceedings{${this.props.title}`)
+      entry.push(`@inproceedings{${key},`)
+      entry.push(`  booktitle = {Proceedings of ${this.props.source}},`)
     }
     else {
       entry.push('@article')
+      entry.push(`  journal = {${this.props.source}},`)
     }
+
+    entry.push(`  title  = {${this.props.title}},`)
+    entry.push(`  author = {${this.props.authors.trim().replace(/,/g, ' and ')}},`)
+    entry.push(`  year   = {${this.props.year}},`)
 
     entry.push('}')
     return entry.join('\n') 

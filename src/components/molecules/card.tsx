@@ -12,9 +12,10 @@ class Card extends Component<Props, {}> {
 
   constructor (props: any) {
     super(props)
+
   }
 
-  createKeywords () {
+  createKeywords = () => {
     if (this.props.paper.Keywords == "") return ""
 
     return this.props.paper.Keywords
@@ -25,12 +26,26 @@ class Card extends Component<Props, {}> {
       )
   }
 
+  createAuthors = () => {
+    return this.props.paper.Authors.trim().replace(/,/g, ' and ')
+  }
+
+  createFirstAuthor = () => {
+    return this.props.paper['Authors']
+      .trim()
+      .split(",")[0]
+      .split(" ").slice(-1)[0]
+  }
+
   render () {
+    console.log(this.props.paper)
     return (
       <div className="column">
         <div className="card" key={this.props.idx}>
           <ModalButton
             title={this.props.paper['Title']}
+            firstAuthor={this.createFirstAuthor()}
+            authors={this.createAuthors()}
             year={this.props.paper['Year']}
             source={this.props.paper['Source']}
             paperType={this.props.paper['Paper type']}
