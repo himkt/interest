@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Header from './components/organisms/header'
-import Paper from './components/templates/paper'
+import Header from './organisms/header'
+import Hero from './organisms/hero'
+import Paper from './templates/paper'
+import Footer from './organisms/footer'
 
 
 class App extends Component<{}, {}> {
@@ -9,7 +11,9 @@ class App extends Component<{}, {}> {
     return (
       <div>
         <Header />
+        <Hero />
         <Paper />
+        <Footer />
       </div>
     )
   }
