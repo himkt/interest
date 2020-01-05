@@ -1,24 +1,24 @@
 const path = require('path');
 
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    extensions: ['.js']
+    extensions: ['.js', '.tsx']
   },
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
+  optimization: {
+    minimize: false,
+  },
   devtool: 'inline-soruce-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
@@ -26,8 +26,12 @@ module.exports = {
         }
       },
       {
+        test: /\.tsx?$/,
+        loaders: 'ts-loader'
+      },
+      {
         test: /\.css$/,
-        loaders: [MiniCssExtractPlugin.loader, 'css-loader'],
+        loaders: ['style-loader', 'css-loader'],
       }
     ]
   },
@@ -37,10 +41,5 @@ module.exports = {
       index: 'index.html'
     },
     port: '3000'
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
-  ]
+  }
 }
