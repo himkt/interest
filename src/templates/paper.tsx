@@ -6,9 +6,7 @@ import LoadingContainer from '../atoms/loading'
 
 const toJSON = (records: any) => {
   const recordsArray = records.map((r: string) => r.split('\t'))
-
-  const columns = recordsArray[0]
-  const papers = recordsArray.slice(1)
+  const [columns, ...papers] = recordsArray
 
   const papersJson = papers.map((paper: any) => {
     const dict: any = {}
