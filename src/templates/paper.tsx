@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import Card from '../molecules/card'
 import Form from '../molecules/form'
+import LoadingContainer from '../atoms/loading'
 
 
 const toJSON = (records: any) => {
-  const fSplit = (r: string) => r.split('\t')
-  const recordsArray = records.map(fSplit)
-  const columns = recordsArray[0]
-  const papers = recordsArray.slice(1)
+  const recordsArray = records.map((r: string) => r.split('\t'))
+  const [columns, ...papers] = recordsArray
+
   const papersJson = papers.map((paper: any) => {
     const dict: any = {}
     for (let i = 0; i < columns.length; i++) {
-      dict[columns[i].trim()] = paper[i] || ''
+      const _key = columns[i].trim()
+      const _paper = (paper[i] || '').trim()
+      dict[_key] = _paper
     }
     return dict
   })
+
+  papersJson.reverse()
   return papersJson
 }
 
@@ -87,17 +91,7 @@ class Paper extends Component<{}, State> {
 
     if (!this.state.filt) {
       return (
-        <section style={{padding: 3 + 'rem'}}>
-          <div className="container">
-            <div className="columns">
-              <div className="column" />
-              <div className="column is-one-third">
-                <progress className="progress is-medium is-dark" max="100">Loading...</progress>
-              </div>
-              <div className="column" />
-            </div>
-          </div>
-        </section>
+        <LoadingContainer />
       )
     }
 
