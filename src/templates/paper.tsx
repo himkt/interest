@@ -4,17 +4,21 @@ import Form from '../molecules/form'
 
 
 const toJSON = (records: any) => {
-  const fSplit = (r: string) => r.split('\t')
-  const recordsArray = records.map(fSplit)
+  const recordsArray = records.map((r: string) => r.split('\t'))
+
   const columns = recordsArray[0]
   const papers = recordsArray.slice(1)
   const papersJson = papers.map((paper: any) => {
     const dict: any = {}
     for (let i = 0; i < columns.length; i++) {
-      dict[columns[i].trim()] = paper[i] || ''
+      const _key = columns[i].trim()
+      const _paper = (paper[i] || '').trim()
+      dict[_key] = _paper
     }
     return dict
   })
+
+  papersJson.reverse()
   return papersJson
 }
 
