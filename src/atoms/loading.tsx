@@ -1,11 +1,11 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 
 
 class LoadingContainer extends Component<{}, {}> {
 
-  render () {
+  render() {
     return (
-      <section style={{padding: 3 + 'rem'}}>
+      <section style={{ padding: '3rem' }}>
         <div className="container is-max-widescreen">
           <progress className="progress is-medium is-dark" max="100">Loading...</progress>
         </div>

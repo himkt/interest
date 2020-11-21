@@ -4,7 +4,7 @@ import logo from '../../img/logo.png';
 
 class Header extends React.Component<any> {
 
-  render () {
+  render() {
     return (
       <nav className="navbar is-transparent is-info">
         <div className="container">

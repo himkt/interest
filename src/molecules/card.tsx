@@ -26,7 +26,7 @@ interface Props {
 
 class Card extends Component<Props, {}> {
 
-  constructor (props: any) {
+  constructor(props: any) {
     super(props)
   }
 
@@ -59,7 +59,7 @@ class Card extends Component<Props, {}> {
     if (issueLink == '') return ''
 
     return (
-      <a href={issueLink} target='_blank' style={{paddingRight: 0.5 + 'rem'}}>
+      <a href={issueLink} target='_blank' style={{ paddingRight: 0.5 + 'rem' }}>
         <span className='tag is-success is-light'>Issue</span>
       </a>
     )
@@ -73,7 +73,7 @@ class Card extends Component<Props, {}> {
     )
   }
 
-  render () {
+  render() {
     return (
       <div className='column'>
         <div className='card' key={this.props.idx}>
@@ -100,7 +100,7 @@ class Card extends Component<Props, {}> {
                 <span className='tag is-danger is-light'>{this.props.paper.year}</span>
                 {this.createKeywords()}
               </div>
-           </div>
+            </div>
           </footer>
         </div>
       </div>

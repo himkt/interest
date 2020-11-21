@@ -6,7 +6,7 @@ import Footer from './organisms/footer'
 
 class App extends Component<{}, {}> {
 
-  render () {
+  render() {
     return (
       <div>
         <Header />
