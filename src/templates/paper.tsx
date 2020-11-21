@@ -31,16 +31,16 @@ class Paper extends Component<{}, State> {
   componentDidMount() {
     fetch(this.url)
       .then(response => response.json())
-      .then(data => this.setState({data: data, filt: data}))
+      .then(data => this.setState({ data: data, filt: data }))
   }
 
   filterContentsByQuery(query: string) {
     if (this.state.data != null) {
       const filt = this.state.data.filter((paper: any) => {
-          var item = ''
-          for (var key in paper) item += paper[key] + ' '
-          return item.toLowerCase().match(query.toLowerCase())
-        }
+        var item = ''
+        for (var key in paper) item += paper[key] + ' '
+        return item.toLowerCase().match(query.toLowerCase())
+      }
       )
       this.setState({ filt })
     }
@@ -56,8 +56,8 @@ class Paper extends Component<{}, State> {
 
     return (
       <div>
-        <Form updateContents={this.filterContentsByQuery}/>
-        <section style={{padding: 3 + 'rem'}}>
+        <Form updateContents={this.filterContentsByQuery} />
+        <section style={{ padding: '3rem' }}>
           <div className="container">
             <div className="columns">
               {this.state.filt.map((paper: any, idx: number) => (

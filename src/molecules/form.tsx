@@ -14,7 +14,7 @@ class Form extends Component<Props, {}> {
 
   render() {
     return (
-      <section style={{padding: 1 + 'rem'}}>
+      <section style={{ padding: '1rem' }}>
         <div className="container">
           <div className="field">
             <label className="label">Query</label>

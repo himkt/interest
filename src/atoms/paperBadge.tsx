@@ -8,7 +8,7 @@ interface Props {
 
 
 class PaperBadge extends React.Component<Props, {}> {
-  render () {
+  render() {
     return (
       <span className={this.props.badgeClass}>{this.props.text}</span>
     )

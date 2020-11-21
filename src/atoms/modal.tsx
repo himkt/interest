@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 
 interface State {
-  isActive: string | null
+  isActive: string
 }
 
 
@@ -23,11 +23,11 @@ class ModalButton extends Component<Props, State> {
   }
 
   showModal = () => {
-    this.setState({isActive: "is-active"})
+    this.setState({ isActive: "is-active" })
   }
 
   closeModal = () => {
-    this.setState({isActive: ""})
+    this.setState({ isActive: "" })
   }
 
   createBibTexEntry = () => {
@@ -48,29 +48,29 @@ class ModalButton extends Component<Props, State> {
     entry.push(`  year   = {${this.props.year}},`)
 
     entry.push('}')
-    return entry.join('\n') 
+    return entry.join('\n')
   }
 
   componentDidMount() {
-    this.setState({isActive: ""});
+    this.setState({ isActive: "" });
   }
 
-  render () {
-    if(!this.state) return <span />
+  render() {
+    if (!this.state) return <span />
 
     return (
-      <div style={{paddingRight: 0.5 + 'rem'}}>
+      <div>
         <div className={["modal", this.state.isActive].join(" ")}>
-          <div className="modal-background"></div>
+          <div className="modal-background" />
           <div className="modal-card">
             <header className="modal-card-head">
               <p className="modal-card-title">BibTex entry</p>
             </header>
             <section className="modal-card-body">
-              <pre style={{whiteSpace: "pre"}}>{this.createBibTexEntry()}</pre>
+              <pre style={{ whiteSpace: "pre" }}>{this.createBibTexEntry()}</pre>
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-primary" onClick={this.closeModal}>Close</button>
+              <button className="button is-info" onClick={this.closeModal}>Close</button>
             </footer>
           </div>
         </div>
