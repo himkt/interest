@@ -59,7 +59,7 @@ class Paper extends Component<{}, State> {
         <Form updateContents={this.filterContentsByQuery} />
         <section style={{ padding: '3rem' }}>
           <div className="container">
-            <div className="columns">
+            <div className="columns is-multiline">
               {this.state.filt.map((paper: any, idx: number) => (
                 <Card paper={paper} idx={idx} key={idx} />
               ))}
