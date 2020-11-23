@@ -75,7 +75,7 @@ class Card extends Component<Props, {}> {
 
   render() {
     return (
-      <div className='column'>
+      <div className='column is-3-desktop is-6-tablet'>
         <div className='card' key={this.props.idx}>
           <div className='card-header'>
             <p className='card-header-title'><time>Added: {this.props.paper.timeStamp}</time></p>
