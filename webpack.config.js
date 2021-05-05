@@ -14,28 +14,34 @@ module.exports = {
   optimization: {
     minimize: false,
   },
-  devtool: 'inline-soruce-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
         test: /\.tsx$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
-        }
-      },
-      {
-        test: /\.tsx?$/,
-        loaders: 'ts-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react',
+              ]
+            }
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ]
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.png$/,
-        loaders: 'url-loader'
+        use: ['url-loader']
       }
     ]
   },
