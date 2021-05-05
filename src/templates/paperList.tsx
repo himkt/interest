@@ -10,10 +10,7 @@ const PaperList = () => {
   const [data, setData] = useState([]);
 
 
-  const url: string = (
-    'https://script.google.com/macros/s/'
-    + 'AKfycbzh0Bz7rPAK9gcbjdJXpccEHTsfL5sQ4X9weX8CSVuwWS_TFF9i/exec'
-  )
+  const url: string = 'https://script.google.com/macros/s/AKfycbwVUsinDsep3W50E9fhuSrvQIiXVqsb4DFp1nvBkRBhbmOEvpNT6x3yMem6O5Zh3q3odA/exec';
 
 
   useEffect(() => {
