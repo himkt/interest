@@ -15,13 +15,16 @@ const ModalButton = (props: Props) => {
 
   const [isActive, setIsActive] = useState("");
 
+
   const showModal = () => {
     setIsActive("is-active");
   }
 
+
   const closeModal = () => {
     setIsActive("");
   }
+
 
   const createBibTexEntry = () => {
     var entry = []
@@ -44,9 +47,11 @@ const ModalButton = (props: Props) => {
     return entry.join('\n')
   }
 
+
   useEffect(() => {
     setIsActive("");
-  })
+  });
+
 
   return (
     <div>

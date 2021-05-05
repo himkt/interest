@@ -9,10 +9,12 @@ const PaperList = () => {
   const [filt, setFilt] = useState([]);
   const [data, setData] = useState([]);
 
+
   const url: string = (
     'https://script.google.com/macros/s/'
     + 'AKfycbzh0Bz7rPAK9gcbjdJXpccEHTsfL5sQ4X9weX8CSVuwWS_TFF9i/exec'
   )
+
 
   useEffect(() => {
     fetch(url)
@@ -23,7 +25,9 @@ const PaperList = () => {
       })
   }, []);
 
+
   const filterContentsByQuery = (query: string) => {
+
     const filt = data.filter((paper: any) => {
       var item = ''
       for (var key in paper) item += paper[key] + ' '
