@@ -28,8 +28,8 @@ const ModalButton = (props: Props) => {
 
   const createBibTexEntry = () => {
     var entry = []
-
     const key = props.firstAuthor + props.year
+
     if (props.paperType == 'Conference paper') {
       entry.push(`@inproceedings{${key},`)
       entry.push(`  booktitle = {Proceedings of ${props.source}},`)
@@ -50,7 +50,7 @@ const ModalButton = (props: Props) => {
 
   useEffect(() => {
     setIsActive("");
-  });
+  }, []);
 
 
   return (
@@ -69,7 +69,7 @@ const ModalButton = (props: Props) => {
           </footer>
         </div>
       </div>
-      <a><span className="tag is-info" onClick={showModal}>BibTex</span></a>
+      <a><span className="tag is-normal is-info is-light" onClick={showModal}>BibTex</span></a>
     </div>
   )
 }
