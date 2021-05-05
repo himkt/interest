@@ -4,7 +4,7 @@ import Form from '../molecules/form'
 import LoadingContainer from '../atoms/loading'
 
 
-const Paper = () => {
+const PaperList = () => {
 
   const [filt, setFilt] = useState([]);
   const [data, setData] = useState([]);
@@ -55,4 +55,4 @@ const Paper = () => {
 }
 
 
-export default Paper;
+export default PaperList;

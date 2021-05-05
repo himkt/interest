@@ -1,21 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Header from './organisms/header'
-import Paper from './templates/paper'
+import PaperList from './templates/paperList'
 import Footer from './organisms/footer'
 
 
-class App extends Component<{}, {}> {
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <Paper />
-        <Footer />
-      </div>
-    )
-  }
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <PaperList />
+      <Footer />
+    </div>
+  )
 }
 
 
-export default App
+export default App;
