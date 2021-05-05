@@ -56,7 +56,7 @@ const Card = (props: Props) => {
 
     return (
       <a href={issueLink} target='_blank' style={{ paddingRight: 0.5 + 'rem' }}>
-        <span className='tag is-success is-light'>Issue</span>
+        <span className='tag is-normal is-success is-light'>Issue</span>
       </a>
     )
   }
@@ -81,7 +81,7 @@ const Card = (props: Props) => {
         </div>
         <footer className='card-footer'>
           <div className='card-footer-item'>
-            <div className='tags are-medium'>
+            <div className='tags are-normal'>
               <ModalButton
                 title={props.paper.title}
                 firstAuthor={createFirstAuthor()}
@@ -91,7 +91,7 @@ const Card = (props: Props) => {
                 paperType={props.paper.paperType}
               />
               {createGitHubIssueLink()}
-              <span className='tag is-primary is-light'>{props.paper.sourceShort}</span>
+              <span className='tag is-normal is-primary is-light'>{props.paper.sourceShort}</span>
               <span className='tag is-danger is-light'>{props.paper.year}</span>
               {createKeywords()}
             </div>
