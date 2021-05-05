@@ -17,7 +17,7 @@ const Header = () => {
               <a className="navbar-link">Links</a>
               <div className="navbar-dropdown is-boxed is-right">
                 <a className="navbar-item" href="https://twitter.com/himkt">Twitter</a>
-                <a className="navbar-item" href="https://twitter.com/hyperparams">Twitter (en)</a>
+                <a className="navbar-item" href="https://twitter.com/himako_h">Twitter (en)</a>
                 <a className="navbar-item" href="https://github.com/himkt">GitHub</a>
                 <a className="navbar-item" href="https://note.com/himkt">Note</a>
                 <a className="navbar-item" href="https://qiita.com/klis">Qiita</a>
