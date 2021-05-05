@@ -7,13 +7,11 @@ interface Props {
 }
 
 
-class PaperBadge extends React.Component<Props, {}> {
-  render() {
-    return (
-      <span className={this.props.badgeClass}>{this.props.text}</span>
-    )
-  }
+const PaperBadge = (props: Props) => {
+  return (
+    <span className={props.badgeClass}>{props.text}</span>
+  )
 }
 
 
-export default PaperBadge
+export default PaperBadge;

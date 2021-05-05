@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 interface Props {
@@ -11,75 +11,63 @@ interface Props {
 }
 
 
-interface State {
-  isActive: string
-}
+const ModalButton = (props: Props) => {
 
+  const [isActive, setIsActive] = useState("");
 
-class ModalButton extends Component<Props, State> {
-
-  super() {
-    this.state = { isActive: "" }
+  const showModal = () => {
+    setIsActive("is-active");
   }
 
-  showModal = () => {
-    this.setState({ isActive: "is-active" })
+  const closeModal = () => {
+    setIsActive("");
   }
 
-  closeModal = () => {
-    this.setState({ isActive: "" })
-  }
-
-  createBibTexEntry = () => {
+  const createBibTexEntry = () => {
     var entry = []
 
-    const key = this.props.firstAuthor + this.props.year
-    if (this.props.paperType == 'Conference paper') {
+    const key = props.firstAuthor + props.year
+    if (props.paperType == 'Conference paper') {
       entry.push(`@inproceedings{${key},`)
-      entry.push(`  booktitle = {Proceedings of ${this.props.source}},`)
+      entry.push(`  booktitle = {Proceedings of ${props.source}},`)
     }
     else {
       entry.push('@article')
-      entry.push(`  journal = {${this.props.source}},`)
+      entry.push(`  journal = {${props.source}},`)
     }
 
-    entry.push(`  title  = {${this.props.title}},`)
-    entry.push(`  author = {${this.props.authors.trim().replace(/,/g, ' and ')}},`)
-    entry.push(`  year   = {${this.props.year}},`)
+    entry.push(`  title  = {${props.title}},`)
+    entry.push(`  author = {${props.authors.trim().replace(/,/g, ' and ')}},`)
+    entry.push(`  year   = {${props.year}},`)
 
     entry.push('}')
     return entry.join('\n')
   }
 
-  componentDidMount() {
-    this.setState({ isActive: "" });
-  }
+  useEffect(() => {
+    setIsActive("");
+  })
 
-  render() {
-    if (!this.state) return <span />
-
-    return (
-      <div>
-        <div className={["modal", this.state.isActive].join(" ")}>
-          <div className="modal-background" />
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">BibTex entry</p>
-            </header>
-            <section className="modal-card-body">
-              <pre style={{ whiteSpace: "pre" }}>{this.createBibTexEntry()}</pre>
-            </section>
-            <footer className="modal-card-foot">
-              <button className="button is-info" onClick={this.closeModal}>Close</button>
-            </footer>
-          </div>
+  return (
+    <div>
+      <div className={["modal", isActive].join(" ")}>
+        <div className="modal-background" />
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">BibTex entry</p>
+          </header>
+          <section className="modal-card-body">
+            <pre style={{ whiteSpace: "pre" }}>{createBibTexEntry()}</pre>
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button is-info" onClick={closeModal}>Close</button>
+          </footer>
         </div>
-        <a><span className="tag is-info" onClick={this.showModal}>BibTex</span></a>
       </div>
-    )
-
-  }
+      <a><span className="tag is-info" onClick={showModal}>BibTex</span></a>
+    </div>
+  )
 }
 
 
-export default ModalButton
+export default ModalButton;

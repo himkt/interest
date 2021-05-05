@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ModalButton from '../atoms/modal'
 
 
@@ -24,16 +24,12 @@ interface Props {
 }
 
 
-class Card extends Component<Props, {}> {
+const Card = (props: Props) => {
 
-  constructor(props: any) {
-    super(props)
-  }
+  const createKeywords = () => {
+    if (props.paper.keywords == '') return ''
 
-  createKeywords = () => {
-    if (this.props.paper.keywords == '') return ''
-
-    return this.props.paper.keywords
+    return props.paper.keywords
       .split(',')
       .map(
         (e: string, idx: number) =>
@@ -41,21 +37,21 @@ class Card extends Component<Props, {}> {
       )
   }
 
-  createAuthors = () => {
-    return this.props.paper.authors
+  const createAuthors = () => {
+    return props.paper.authors
       .trim()
       .replace(/,/g, ' and ')
   }
 
-  createFirstAuthor = () => {
-    return this.props.paper.authors
+  const createFirstAuthor = () => {
+    return props.paper.authors
       .trim()
       .split(',')[0]
       .split(' ').slice(-1)[0]
   }
 
-  createGitHubIssueLink = () => {
-    const issueLink = this.props.paper.issueLink.trim()
+  const createGitHubIssueLink = () => {
+    const issueLink = props.paper.issueLink.trim()
     if (issueLink == '') return ''
 
     return (
@@ -65,47 +61,45 @@ class Card extends Component<Props, {}> {
     )
   }
 
-  createTitle = () => {
+  const createTitle = () => {
     return (
       <p className='card-header-title'>
-        <a href={this.props.paper.paperLink}>{this.props.paper.title}</a>
+        <a href={props.paper.paperLink}>{props.paper.title}</a>
       </p>
     )
   }
 
-  render() {
-    return (
-      <div className='column is-3-desktop is-6-tablet'>
-        <div className='card' key={this.props.idx}>
-          <div className='card-header'>
-            <p className='card-header-title'><time>Added: {this.props.paper.timeStamp}</time></p>
-          </div>
-          <div className='card-content'>
-            {this.createTitle()}
-            <p className='card-text'>{this.props.paper.note}</p>
-          </div>
-          <footer className='card-footer'>
-            <div className='card-footer-item'>
-              <div className='tags are-medium'>
-                <ModalButton
-                  title={this.props.paper.title}
-                  firstAuthor={this.createFirstAuthor()}
-                  authors={this.createAuthors()}
-                  year={this.props.paper.year}
-                  source={this.props.paper.source}
-                  paperType={this.props.paper.paperType}
-                />
-                {this.createGitHubIssueLink()}
-                <span className='tag is-primary is-light'>{this.props.paper.sourceShort}</span>
-                <span className='tag is-danger is-light'>{this.props.paper.year}</span>
-                {this.createKeywords()}
-              </div>
-            </div>
-          </footer>
+  return (
+    <div className='column is-3-desktop is-6-tablet'>
+      <div className='card' key={props.idx}>
+        <div className='card-header'>
+          <p className='card-header-title'><time>Added: {props.paper.timeStamp}</time></p>
         </div>
+        <div className='card-content'>
+          {createTitle()}
+          <p className='card-text'>{props.paper.note}</p>
+        </div>
+        <footer className='card-footer'>
+          <div className='card-footer-item'>
+            <div className='tags are-medium'>
+              <ModalButton
+                title={props.paper.title}
+                firstAuthor={createFirstAuthor()}
+                authors={createAuthors()}
+                year={props.paper.year}
+                source={props.paper.source}
+                paperType={props.paper.paperType}
+              />
+              {createGitHubIssueLink()}
+              <span className='tag is-primary is-light'>{props.paper.sourceShort}</span>
+              <span className='tag is-danger is-light'>{props.paper.year}</span>
+              {createKeywords()}
+            </div>
+          </div>
+        </footer>
       </div>
+    </div>
     )
-  }
 }
 
 

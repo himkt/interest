@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent } from 'react'
+import React, { ChangeEvent } from 'react'
 
 
 interface Props {
@@ -6,31 +6,29 @@ interface Props {
 }
 
 
-class Form extends Component<Props, {}> {
+const Form = (props: Props, {}) => {
 
-  handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.props.updateContents(e.currentTarget.value)
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    props.updateContents(e.currentTarget.value)
   }
 
-  render() {
-    return (
-      <section style={{ padding: '1rem' }}>
-        <div className="container">
-          <div className="field">
-            <label className="label">Query</label>
-            <div className="control">
-              <input
-                type="text"
-                className="input"
-                placeholder="Named Entity Recognition"
-                onChange={this.handleInputChange} />
-            </div>
+  return (
+    <section style={{ padding: '1rem' }}>
+      <div className="container">
+        <div className="field">
+          <label className="label">Query</label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="Named Entity Recognition"
+              onChange={handleInputChange} />
           </div>
         </div>
-      </section>
-    )
-  }
+      </div>
+    </section>
+  )
 }
 
 
-export default Form
+export default Form;

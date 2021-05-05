@@ -1,74 +1,57 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../molecules/card'
 import Form from '../molecules/form'
 import LoadingContainer from '../atoms/loading'
 
 
-interface State {
-  data: any | null
-  filt: any | null
-}
+const Paper = () => {
 
+  const [filt, setFilt] = useState([]);
+  const [data, setData] = useState([]);
 
-class Paper extends Component<{}, State> {
-
-  private url: string = (
+  const url: string = (
     'https://script.google.com/macros/s/'
     + 'AKfycbzh0Bz7rPAK9gcbjdJXpccEHTsfL5sQ4X9weX8CSVuwWS_TFF9i/exec'
   )
 
-  constructor(props: {}) {
-    super(props)
-
-    this.state = {
-      data: null,
-      filt: null
-    }
-
-    this.filterContentsByQuery = this.filterContentsByQuery.bind(this)
-  }
-
-  componentDidMount() {
-    fetch(this.url)
+  useEffect(() => {
+    fetch(url)
       .then(response => response.json())
-      .then(data => this.setState({ data: data, filt: data }))
+      .then(data => {
+        setData(data);
+        setFilt(data);
+      })
+  }, []);
+
+  const filterContentsByQuery = (query: string) => {
+    const filt = data.filter((paper: any) => {
+      var item = ''
+      for (var key in paper) item += paper[key] + ' '
+      return item.toLowerCase().match(query.toLowerCase())
+    });
+
+    setFilt(filt);
   }
 
-  filterContentsByQuery(query: string) {
-    if (this.state.data != null) {
-      const filt = this.state.data.filter((paper: any) => {
-        var item = ''
-        for (var key in paper) item += paper[key] + ' '
-        return item.toLowerCase().match(query.toLowerCase())
-      }
-      )
-      this.setState({ filt })
-    }
+
+  if (data.length == 0) {
+    return <LoadingContainer />
   }
 
-  render() {
-
-    if (!this.state.filt) {
-      return (
-        <LoadingContainer />
-      )
-    }
-
-    return (
-      <div>
-        <Form updateContents={this.filterContentsByQuery} />
-        <section style={{ padding: '3rem' }}>
-          <div className="container">
-            <div className="columns is-multiline">
-              {this.state.filt.map((paper: any, idx: number) => (
-                <Card paper={paper} idx={idx} key={idx} />
-              ))}
-            </div>
+  return (
+    <div>
+      <Form updateContents={filterContentsByQuery} />
+      <section style={{ padding: '3rem' }}>
+        <div className="container">
+          <div className="columns is-multiline">
+            {filt.map((paper: any, idx: number) => (
+              <Card paper={paper} idx={idx} key={idx} />
+            ))}
           </div>
-        </section>
-      </div>
-    )
-  }
+        </div>
+      </section>
+    </div>
+  )
 }
 
 
