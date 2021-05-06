@@ -6,34 +6,31 @@ import LoadingContainer from '../atoms/loading'
 
 const PaperList = () => {
 
-  const [filt, setFilt] = useState([]);
-  const [data, setData] = useState([]);
+  const [filt, setFilt] = useState<Array<Object>>([]);
+  const [data, setData] = useState<Array<Object>>([]);
 
-
-  const url: string = 'https://script.google.com/macros/s/AKfycbwVUsinDsep3W50E9fhuSrvQIiXVqsb4DFp1nvBkRBhbmOEvpNT6x3yMem6O5Zh3q3odA/exec';
-
+  const appId: string = 'AKfycbwVUsinDsep3W50E9fhuSrvQIiXVqsb4DFp1nvBkRBhbmOEvpNT6x3yMem6O5Zh3q3odA';
+  const url: string = `https://script.google.com/macros/s/${appId}/exec`;
 
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        setData(data);
-        setFilt(data);
+        let paperItems: Array<Object> = data;
+        paperItems.reverse();
+        setFilt(paperItems);
+        setData(paperItems);
       })
   }, []);
 
-
   const filterContentsByQuery = (query: string) => {
-
     const filt = data.filter((paper: any) => {
       var item = ''
       for (var key in paper) item += paper[key] + ' '
       return item.toLowerCase().match(query.toLowerCase())
     });
-
     setFilt(filt);
   }
-
 
   if (data.length == 0) {
     return <LoadingContainer />
@@ -44,7 +41,13 @@ const PaperList = () => {
       <Form updateContents={filterContentsByQuery} />
       <section style={{ padding: '3rem' }}>
         <div className="container">
-          { filt.map((paper: any, idx: number) => <Card paper={paper} idx={idx} key={idx} />) }
+          { filt.map((paper: any, idx: number) =>
+            <Card
+              paper={paper}
+              idx={idx}
+              key={idx}
+            />)
+          }
         </div>
       </section>
     </div>
