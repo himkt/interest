@@ -15,43 +15,29 @@ const ModalButton = (props: Props) => {
 
   const [isActive, setIsActive] = useState("");
 
-
-  const showModal = () => {
-    setIsActive("is-active");
-  }
-
-
-  const closeModal = () => {
-    setIsActive("");
-  }
-
-
   const createBibTexEntry = () => {
-    var entry = []
-    const key = props.firstAuthor + props.year
+    var entry = ''
 
     if (props.paperType == 'Conference paper') {
-      entry.push(`@inproceedings{${key},`)
-      entry.push(`  booktitle = {Proceedings of ${props.source}},`)
+      entry += `@inproceedings{${props.firstAuthor + props.year},\n`
+      entry += `  booktitle = {Proceedings of ${props.source}},\n`
     }
     else {
-      entry.push('@article')
-      entry.push(`  journal = {${props.source}},`)
+      entry += '@article\n'
+      entry += `  journal = {${props.source}},\n`
     }
 
-    entry.push(`  title  = {${props.title}},`)
-    entry.push(`  author = {${props.authors.trim().replace(/,/g, ' and ')}},`)
-    entry.push(`  year   = {${props.year}},`)
+    entry += `  title  = {${props.title}},\n`
+    entry += `  author = {${props.authors.trim().replace(/,/g, ' and ')}},\n`
+    entry += `  year   = {${props.year}},\n`
+    entry += '}'
 
-    entry.push('}')
-    return entry.join('\n')
+    return entry
   }
-
 
   useEffect(() => {
     setIsActive("");
   }, []);
-
 
   return (
     <div>
@@ -62,14 +48,14 @@ const ModalButton = (props: Props) => {
             <p className="modal-card-title">BibTex entry</p>
           </header>
           <section className="modal-card-body">
-            <pre style={{ whiteSpace: "pre" }}>{createBibTexEntry()}</pre>
+            <pre style={{ whiteSpace: "pre" }}>{ createBibTexEntry() }</pre>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-info" onClick={closeModal}>Close</button>
+            <button className="button is-info" onClick={ () => setIsActive("") }>Close</button>
           </footer>
         </div>
       </div>
-      <a><span className="tag is-normal is-info is-light" onClick={showModal}>BibTex</span></a>
+      <a><span className="tag is-normal is-info is-light" onClick={ () => setIsActive("is-active") }>BibTex</span></a>
     </div>
   )
 }

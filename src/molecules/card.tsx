@@ -1,5 +1,6 @@
 import React from 'react'
 import ModalButton from '../atoms/modal'
+import Tags from '../atoms/tags'
 
 
 interface PaperInterface {
@@ -26,80 +27,42 @@ interface Props {
 
 const Card = (props: Props) => {
 
-  const createKeywords = () => {
-    if (props.paper.keywords == '') return ''
-
-    return props.paper.keywords
-      .split(',')
-      .map(
-        (e: string, idx: number) =>
-          <span key={idx} className='tag is-warn'>{e}</span>
-      )
+  const authors = () => {
+    return props.paper.authors.trim().replace(/,/g, ' and ')
   }
 
-  const createAuthors = () => {
-    return props.paper.authors
-      .trim()
-      .replace(/,/g, ' and ')
-  }
-
-  const createFirstAuthor = () => {
-    return props.paper.authors
-      .trim()
-      .split(',')[0]
-      .split(' ').slice(-1)[0]
-  }
-
-  const createGitHubIssueLink = () => {
-    const issueLink = props.paper.issueLink.trim()
-    if (issueLink == '') return ''
-
-    return (
-      <a href={issueLink} target='_blank' style={{ paddingRight: 0.5 + 'rem' }}>
-        <span className='tag is-normal is-success is-light'>Issue</span>
-      </a>
-    )
-  }
-
-  const createTitle = () => {
-    return (
-      <p className='card-header-title'>
-        <a href={props.paper.paperLink}>{props.paper.title}</a>
-      </p>
-    )
+  const firstAuthor = () => {
+    return props.paper.authors.trim().split(',')[0].split(' ').slice(-1)[0]
   }
 
   return (
-    <div className='column is-3-desktop is-6-tablet'>
-      <div className='card' key={props.idx}>
-        <div className='card-header'>
-          <p className='card-header-title'><time>Added: {props.paper.timeStamp}</time></p>
+    <div>
+      <div className='message is-link' key={props.idx}>
+        <div className='message-header'>
+          <p>{ props.paper.title }</p>
+          <ModalButton
+            title={props.paper.title}
+            firstAuthor={ firstAuthor() }
+            authors={ authors() }
+            year={props.paper.year}
+            source={props.paper.source}
+            paperType={props.paper.paperType}
+          />
         </div>
-        <div className='card-content'>
-          {createTitle()}
-          <p className='card-text'>{props.paper.note}</p>
+        <div className='message-body'>
+          <p>{props.paper.note}</p>
+          <Tags
+            authors={ props.paper.authors }
+            sourceShort={ props.paper.sourceShort }
+            year={ props.paper.year }
+            paperLink={ props.paper.paperLink }
+            keywords={ props.paper.keywords }
+            issueLink={ props.paper.issueLink }
+          />
         </div>
-        <footer className='card-footer'>
-          <div className='card-footer-item'>
-            <div className='tags are-normal'>
-              <ModalButton
-                title={props.paper.title}
-                firstAuthor={createFirstAuthor()}
-                authors={createAuthors()}
-                year={props.paper.year}
-                source={props.paper.source}
-                paperType={props.paper.paperType}
-              />
-              {createGitHubIssueLink()}
-              <span className='tag is-normal is-primary is-light'>{props.paper.sourceShort}</span>
-              <span className='tag is-danger is-light'>{props.paper.year}</span>
-              {createKeywords()}
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
-    )
+  )
 }
 
 

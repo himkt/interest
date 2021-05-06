@@ -44,11 +44,7 @@ const PaperList = () => {
       <Form updateContents={filterContentsByQuery} />
       <section style={{ padding: '3rem' }}>
         <div className="container">
-          <div className="columns is-multiline">
-            {filt.map((paper: any, idx: number) => (
-              <Card paper={paper} idx={idx} key={idx} />
-            ))}
-          </div>
+          { filt.map((paper: any, idx: number) => <Card paper={paper} idx={idx} key={idx} />) }
         </div>
       </section>
     </div>
