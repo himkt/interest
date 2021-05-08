@@ -48,7 +48,7 @@ const ModalButton = (props: Props) => {
             <p className="modal-card-title">BibTex entry</p>
           </header>
           <section className="modal-card-body">
-            <pre style={{ whiteSpace: "pre" }}>{ createBibTexEntry() }</pre>
+            <pre style={{ whiteSpace: "pre", userSelect: "all" }}>{ createBibTexEntry() }</pre>
           </section>
           <footer className="modal-card-foot">
             <button className="button is-info" onClick={ () => setIsActive("") }>Close</button>
