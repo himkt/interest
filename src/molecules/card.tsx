@@ -36,7 +36,7 @@ const Card = (props: Props) => {
   }
 
   return (
-    <div>
+    <div className="container" style={{ marginBottom: "10px" }}>
       <div className='message is-link' key={props.idx}>
         <div className='message-header'>
           <p>{ props.paper.title }</p>

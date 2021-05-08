@@ -46,8 +46,8 @@ const PaperList = () => {
               paper={paper}
               idx={idx}
               key={idx}
-            />)
-          }
+            />
+          )}
         </div>
       </section>
     </div>
