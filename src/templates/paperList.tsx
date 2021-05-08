@@ -39,16 +39,14 @@ const PaperList = () => {
   return (
     <div>
       <Form updateContents={filterContentsByQuery} />
-      <section style={{ padding: '3rem' }}>
-        <div className="container">
-          { filt.map((paper: any, idx: number) =>
-            <Card
-              paper={paper}
-              idx={idx}
-              key={idx}
-            />
-          )}
-        </div>
+      <section style={{ paddingRight: '1.5rem', paddingLeft: '1.5rem' }}>
+        { filt.map((paper: any, idx: number) =>
+          <Card
+            paper={paper}
+            idx={idx}
+            key={idx}
+          />
+        )}
       </section>
     </div>
   )
